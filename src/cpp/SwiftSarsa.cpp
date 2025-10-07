@@ -67,13 +67,11 @@ void SwiftSarsa::do_computation_on_eligible_items(float value_of_the_chosen_acti
                                                   float gamma, float r)
 {
     float delta = r + gamma * value_of_the_chosen_action - this->v_old;
-    this->v_old = value_of_the_chosen_action;
+
     int position = 0;
-    while
-    (position < this->set_of_eligible_components.size())
+    while(position < this->set_of_eligible_components.size())
     {
         int index = this->set_of_eligible_components[position];
-
         this->delta_w[index] = delta * this->z[index] - z_delta[index] * this->v_delta;
         this->w[index] += this->delta_w[index];
         this->beta[index] +=
@@ -89,7 +87,7 @@ void SwiftSarsa::do_computation_on_eligible_items(float value_of_the_chosen_acti
         this->h_old[index] = this->h[index];
         this->h[index] = this->h_temp[index] + delta * this->z_bar[index] - this->z_delta[index] * this->v_delta;
         this->h_temp[index] = this->h[index];
-        z_delta[index] = 0;
+        this->z_delta[index] = 0;
         this->z[index] = gamma * this->lambda * this->z[index];
         this->p[index] = gamma * this->lambda * this->p[index];
         this->z_bar[index] = gamma * this->lambda * this->z_bar[index];
@@ -100,7 +98,6 @@ void SwiftSarsa::do_computation_on_eligible_items(float value_of_the_chosen_acti
             this->p[index] = 0;
             this->z_bar[index] = 0;
             this->delta_w[index] = 0;
-            this->beta[index] += logf(this->decay);
             this->set_of_eligible_components[position] = this->set_of_eligible_components[this->
                 set_of_eligible_components.size() - 1];
             this->set_of_eligible_components.pop_back();
@@ -110,6 +107,7 @@ void SwiftSarsa::do_computation_on_eligible_items(float value_of_the_chosen_acti
             position++;
         }
     }
+    this->v_old = value_of_the_chosen_action;
 }
 
 
@@ -123,7 +121,6 @@ void SwiftSarsa::do_computation_on_active_features(std::vector<std::pair<int, fl
         tau += expf(this->beta[index.first]) * index.second * index.second;
     }
     float E = this->eta;
-
     if (tau > this->eta)
     {
         E = tau;
