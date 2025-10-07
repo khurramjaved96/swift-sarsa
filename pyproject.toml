@@ -24,4 +24,4 @@ Homepage = "https://github.com/khurramjaved96/swift-sarsa"
 wheel.packages = ["src/swiftsarsa"]
 
 [tool.scikit-build.cmake]
-minimum-version = "3.21"
+version = "3.21"
