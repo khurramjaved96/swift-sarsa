@@ -4,7 +4,7 @@ build-backend = "scikit_build_core.build"
 
 [project]
 name = "SwiftSarsa"
-version = "0.1.0"
+version = "0.1.1"
 description = "SwiftSarsa: Fast and Robust Linear Control"
 readme = "README.md"
 requires-python = ">=3.7"
