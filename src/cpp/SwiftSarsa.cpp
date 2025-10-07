@@ -29,13 +29,13 @@ SwiftSarsa::SwiftSarsa(int num_of_features, int num_of_actions, float lambda_ini
     }
 
 
-    this->h = std::vector<float>(num_of_features * num_of_actions, 0);
-    this->h_old = std::vector<float>(num_of_features * num_of_actions, 0);
-    this->h_temp = std::vector<float>(num_of_features * num_of_actions, 0);
+    this->h = std::vector<float>(num_of_features * num_of_actions, 0.0f);
+    this->h_old = std::vector<float>(num_of_features * num_of_actions, 0.0f);
+    this->h_temp = std::vector<float>(num_of_features * num_of_actions, 0.0f);
     this->beta = std::vector<float>(num_of_features * num_of_actions, logf(alpha_init));
-    this->z_bar = std::vector<float>(num_of_features * num_of_actions, 0);
-    this->p = std::vector<float>(num_of_features * num_of_actions, 0);
-    this->last_alpha = std::vector<float>(num_of_features * num_of_actions, 0);
+    this->z_bar = std::vector<float>(num_of_features * num_of_actions, 0.0f);
+    this->p = std::vector<float>(num_of_features * num_of_actions, 0.0f);
+    this->last_alpha = std::vector<float>(num_of_features * num_of_actions, 0.0f);
 
     this->v_old = 0;
     this->lambda = lambda_init;
@@ -166,17 +166,17 @@ float
 SwiftSarsa::learn(std::vector<std::pair<int, float>>& feature_indices, float r, float gamma, int action)
 {
     float value_of_the_chosen_action = 0;
-    std::vector<std::pair<int, float>> features_indices_for_action_taken;
-    features_indices_for_action_taken.reserve(feature_indices.size());
+    std::vector<std::pair<int, float>> features_indices_for_the_chosen_action;
+    features_indices_for_the_chosen_action.reserve(feature_indices.size());
     for (auto& index : feature_indices)
     {
         int real_index = this->action_feature_indices[action][index.first];
         value_of_the_chosen_action += this->w[real_index] * index.second;
-        features_indices_for_action_taken.emplace_back(real_index, index.second);
+        features_indices_for_the_chosen_action.emplace_back(real_index, index.second);
     }
 
     this->do_computation_on_eligible_items(value_of_the_chosen_action, gamma, r);
-    this->do_computation_on_active_features(features_indices_for_action_taken);
+    this->do_computation_on_active_features(features_indices_for_the_chosen_action);
     return value_of_the_chosen_action;
 }
 
