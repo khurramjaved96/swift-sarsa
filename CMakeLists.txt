@@ -16,7 +16,7 @@ find_package(pybind11 CONFIG REQUIRED)
 
 # C++ core library (not installed; linked into the Python extension)
 add_library(SwiftSarsa STATIC
-        src/cpp/SwiftSarsa.cpp
+        src/cpp/SwiftSarsa.cpp src/cpp/SwiftSarsaBinaryFeatures.cpp
 )
 target_include_directories(SwiftSarsa PUBLIC
         ${CMAKE_CURRENT_SOURCE_DIR}/src/cpp
