@@ -28,4 +28,26 @@ PYBIND11_MODULE(swift_sarsa, m)
           .def("get_action_values", &SwiftSarsa::get_action_values,
                "Get action values for given feature indices. Returns a list of values of size num_of_actions.",
                py::arg("feature_indices"));
+
+     py::class_<SwiftSarsaBinaryFeatures>(m, "SwiftSarsaBinaryFeatures")
+          .def(py::init<int, int, float, float, float, float, float, float, float>(),
+               "Initialize the SwiftSarsa algorithm",
+               py::arg("num_of_features"),
+               py::arg("num_of_actions"),
+               py::arg("lambda"),
+               py::arg("alpha"),
+               py::arg("meta_step_size"),
+               py::arg("eta"),
+               py::arg("decay"),
+               py::arg("epsilon"),
+               py::arg("eta_min"))
+          .def("learn", &SwiftSarsaBinaryFeatures::learn,
+               "Perform one step of learning. Takes as input features, reward, gamma, and action and returns the value of the chosen action.",
+               py::arg("feature_indices"),
+               py::arg("reward"),
+               py::arg("gamma"),
+               py::arg("action"))
+          .def("get_action_values", &SwiftSarsaBinaryFeatures::get_action_values,
+               "Get action values for given feature indices. Returns a list of values of size num_of_actions.",
+               py::arg("feature_indices"));
 }
