@@ -4,20 +4,40 @@ build-backend = "scikit_build_core.build"
 
 [project]
 name = "swiftsarsa"
-version = "0.1.5"
+version = "0.1.6"
 description = "SwiftSarsa: Fast and Robust Linear Control"
 readme = "README.md"
-requires-python = ">=3.7"
+requires-python = ">=3.9"
 license = { text = "MIT" }
 authors = [{ name = "Khurram Javed" }]
 classifiers = [
-    "Programming Language :: Python :: 3",
-    "Programming Language :: C++",
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    "Programming Language :: C++",
+    "Topic :: Scientific/Engineering",
+    "Topic :: Software Development :: Libraries :: Python Modules",
 ]
 
 [project.urls]
 Homepage = "https://github.com/khurramjaved96/swift-sarsa"
+
+[project.optional-dependencies]
+
+# Supported Platforms and Architectures:
+# - Linux: x86_64, aarch64 (Ubuntu 22.04, 24.04)
+# - Windows: amd64 (latest)
+# - macOS: x86_64 (Intel), arm64 (Apple Silicon) (macOS 13, 14)
+# - Python: 3.9, 3.10, 3.11, 3.12, 3.13, 3.14
 
 [tool.scikit-build]
 # Where the pure-Python package lives (create these files below)

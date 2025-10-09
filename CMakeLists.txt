@@ -36,3 +36,15 @@ install(TARGETS swift_sarsa
         ARCHIVE DESTINATION "${SKBUILD_PLATLIB_DIR}"
         RUNTIME DESTINATION "${SKBUILD_PLATLIB_DIR}"
 )
+
+# Install the static library for C++ linking
+install(TARGETS SwiftSarsa
+        LIBRARY DESTINATION "${SKBUILD_PLATLIB_DIR}/swiftsarsa"
+        ARCHIVE DESTINATION "${SKBUILD_PLATLIB_DIR}/swiftsarsa"
+        RUNTIME DESTINATION "${SKBUILD_PLATLIB_DIR}/swiftsarsa"
+)
+
+# Install header files for C++ development
+install(FILES src/cpp/SwiftSarsa.h
+        DESTINATION "${SKBUILD_PLATLIB_DIR}/swiftsarsa/include"
+)
